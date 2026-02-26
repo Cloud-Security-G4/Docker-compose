@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: ./p1-menu-digital-api
+    container_name: menu-api
+    ports:
+      - "8000:80"
+    networks:
+      - menu-net
+
+  frontend:
+    build:
+      context: ./p1-menu-digital-frontend/livemenu-front
+    container_name: menu-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - menu-net
+
+networks:
+  menu-net:
+    driver: bridge
